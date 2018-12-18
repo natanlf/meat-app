@@ -3,13 +3,15 @@
 
           <!-- Envio cada item para o componente MenuItem. Esse [menuItem] é a variavel input declarada
           no menu item componente. temos também o (add)="addMenuItem($event)" acessamos o add do componente menuItem e 
-          no parametro $event vamos receber o evento, quando fizemos o emit, enviamos um objeto e acessamos esse objeto através do $event  -->
+          no parametro $event vamos receber o evento, quando fizemos o emit, enviamos um objeto e acessamos esse objeto através do $event 
+          Perceba que agora trocamos o método, adicionamos o item no componente carrinho -->
           <mt-menu-item 
           *ngFor="let item of menu | async" 
-          [menuItem]="item" (add)="addMenuItem($event)"></mt-menu-item>
+          [menuItem]="item" (add)="shoppingCart.addItem($event)"></mt-menu-item>
 
         </div>
         <div class="col-md-3 col-xs-12">
-          <mt-shopping-cart></mt-shopping-cart>
+          <!-- template variable, assim coloco o item no componente shoppingcart -->
+          <mt-shopping-cart #shoppingCart></mt-shopping-cart>
       </div>
       <!-- FIM DO MENU -->
