@@ -1,7 +1,7 @@
 import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
 import { RestaurantsService } from './restaurants/restaurants.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -38,8 +38,8 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(ROUTES) //importando rotas para o modulo principal
-  ],
-  providers: [RestaurantsService, ShoppingCartService], //colocando service no provider
+  ],                                                    //LOCALE_ID permite trabalhar com o padrão pt-br para moeda
+  providers: [RestaurantsService, ShoppingCartService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
   bootstrap: [AppComponent]
 })
 export class AppModule { }
