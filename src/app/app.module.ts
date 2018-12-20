@@ -1,3 +1,4 @@
+import { OrderService } from './order/order.service';
 import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
 import { RestaurantsService } from './restaurants/restaurants.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -48,7 +49,7 @@ import { OrderItemsComponent } from './order/order-items/order-items.component'
     FormsModule, //necessário para usar forms no angular
     RouterModule.forRoot(ROUTES) //importando rotas para o modulo principal
   ],                                                    //LOCALE_ID permite trabalhar com o padrão pt-br para moeda
-  providers: [RestaurantsService, ShoppingCartService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
+  providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
   bootstrap: [AppComponent]
 })
 export class AppModule { }

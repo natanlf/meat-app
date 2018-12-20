@@ -46,8 +46,15 @@
             <div class="col-xs-12">
               <p class="lead">Itens do Pedido:</p>
             </div>
-            <!-- Vai receber os itens e também vai disperar eventos que o componente de conta vai receber -->
-            <mt-order-items></mt-order-items>
+            <!-- Vai receber os itens e também vai disperar eventos que o componente de conta vai receber
+            Order component está enviando os itens para order-item component
+            (increaseQty)="increaseQty($event) temos entre parenteses o nome do event emitter que criamos em order-items.component.ts e
+            após o igual temos o nome do método criado no order.component.ts que recebe como parametro o item que vem lá do componente order-item
+            através do $event do emitter" -->
+            <mt-order-items [items]="cartItems()"
+            (increaseQty)="increaseQty($event)"
+            (decreaseQty)="decreaseQty($event)"
+            (remove)="remove($event)"></mt-order-items>
             <!-- /.col -->
           </div>
           <!-- /.row -->
