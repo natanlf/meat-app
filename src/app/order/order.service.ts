@@ -7,6 +7,10 @@ export class OrderService {
     //ShoppingCartService que manipula os dados dos itens do carrinho
     constructor(private cartService: ShoppingCartService){}
 
+    itemsValue(): number{
+        return this.cartService.total()
+    }
+
     cartItems(): CartItem[] { 
         return this.cartService.items
     }

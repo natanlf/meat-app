@@ -65,30 +65,19 @@
               <p class="lead">Formas de Pagamento:</p>
                 <!-- Vamos passar as opçoes de pagamento para o componente radio component -->
                 <div class="form-group">
-                  <mt-radio [options]="paymentOptions" name="paymentOption" ngModel></mt-radio>
+                  <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
                 </div>
 
             </div>
             <!-- /.col -->
             <div class="col-sm-6 col-xs-12">
               <p class="lead">Frete e Total:</p>
+              <!-- entre colchetes tenho itemsValue que é um input do componente delivery-costs que vai receber o valor que vem do 
+              componente pai e depois do igual podemos ver esse valor -->
+              <mt-delivery-costs 
+              [delivery]="delivery"
+              [itemsValue]="itemsValue()"></mt-delivery-costs>
 
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody><tr>
-                    <th style="width:50%">Itens:</th>
-                    <td class="text-right">R$ 20,00</td>
-                  </tr>
-                  <tr>
-                    <th>Frete:</th>
-                    <td class="text-right">R$ 8,00</td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td class="text-right">R$ 28,00</td>
-                  </tr>
-                </tbody></table>
-              </div>
             </div>
             <!-- /.col -->
           </div>
@@ -96,8 +85,8 @@
         </form>
 
         <div class="row">
-          <div class="col-xs-12">
-            <button class="btn btn-success pull-right" [disabled]="!form.valid"><i class="fa fa-credit-card"></i> Concluir Pedido
+          <div class="col-xs-12"> <!-- Desabilita o botão de finalizar quando o form não está valido ou não tem itens -->
+            <button class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0"><i class="fa fa-credit-card"></i> Concluir Pedido
             </button>
           </div>
         </div>
