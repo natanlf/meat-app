@@ -45,5 +45,6 @@ export class OrderService {
         JSON.stringify(order),
         new RequestOptions({headers: headers}))
         .map(response => response.json())  //queremos apenas o corpo, não queremos status e tudo mais que temos de reposta, por isso o map
+        .map(order => order.id)
     }
 }
