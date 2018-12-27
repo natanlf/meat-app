@@ -4,7 +4,7 @@ import { RadioOption } from './../shared/radio/radio-option.model';
 import { Component, OnInit } from '@angular/core';
 import { Order, OrderItem } from './order.model'
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
@@ -41,7 +41,21 @@ export class OrderComponent implements OnInit {
       number: this.formBuilder.control('',[Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('', [Validators.required])
-    })
+    }, {validator: OrderComponent.equalsTo}) //vamos validar um grupo, chamamos o método abaixo
+  }
+
+  static equalsTo(group: AbstractControl): {[key:string]: boolean} { //retorna um objeto onde a chave é do tipo string e o retorno do tipo boolean
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+    
+    if(!email || !emailConfirmation){ //se não existem retornamos indefined
+      return undefined
+    }
+
+    if(email.value !== emailConfirmation.value){ //caso os valores sejam diferentes
+      return {emailsNotMatch:true} //o nome da chave é o nome que eu quiser
+    }
+    return undefined //se os valores são iguais retorna undefined
   }
 
   itemsValue(): number {
