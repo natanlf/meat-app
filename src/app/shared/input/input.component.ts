@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ContentChild, AfterContentInit } from '@angular/core';
-import { NgModel } from '@angular/forms'
+import { NgModel, FormControlName } from '@angular/forms'
 
 @Component({
   selector: 'mt-input-container',
@@ -14,6 +14,7 @@ export class InputComponent implements OnInit, AfterContentInit {
   input: any //objeto que fazemos referencia no component
 
   @ContentChild(NgModel) model: NgModel //referencia, injetamos uma referencia dessa diretiva
+  @ContentChild(FormControlName) control: FormControlName //diretiva que vamos usar com reactive forms
 
   constructor() { }
 
@@ -23,9 +24,9 @@ export class InputComponent implements OnInit, AfterContentInit {
   /*esse método será chamado quando o conteúdo for definido (conteúdo que vai ficar no lugar de ng-content for definido)
   Vamos checar se ngModel existe e pegamos um referencia de ngModel e atribuimos em nosso input */
   ngAfterContentInit(){
-    this.input = this.model
+    this.input = this.model || this.control //caso o não usemos ngModel, então usaremos a diretiva formControlName
     if(this.input===undefined){
-      throw new Error("Esse componente precisa ser usado com uma diretiva ngModel")
+      throw new Error("Esse componente precisa ser usado com uma diretiva ngModel ou formControlName")
     }
   }
 
