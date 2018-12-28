@@ -11,7 +11,7 @@ import { ROUTES } from './app.routes'
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
@@ -33,7 +33,6 @@ import { RatingComponent } from './shared/rating/rating.component'
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    AboutComponent,
     RestaurantsComponent,
     RestaurantComponent,
     RestaurantDetailComponent,
@@ -49,7 +48,7 @@ import { RatingComponent } from './shared/rating/rating.component'
     OrderSummaryComponent,
     RatingComponent
   ],
-  imports: [
+  imports: [ //com o modulo about criado se colocassemos aqui ele ainda seria carregado ao abrir a apliacacao mas não queremos isso
     BrowserModule,
     HttpModule,
     FormsModule, //necessário para usar forms no angular

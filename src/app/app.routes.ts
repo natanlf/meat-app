@@ -4,7 +4,6 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
-import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router'
 
@@ -20,5 +19,6 @@ export const ROUTES: Routes = [
     }, //indicamos parametro
     { path: 'order-summary', component: OrderSummaryComponent },
     { path: 'order', component: OrderComponent },
-    { path: 'about', component: AboutComponent }
+    { path: 'about', loadChildren: './about/about.module#AboutModule' } //carrega o componente de forma tardia (lazy loading)
+    //agora carregamos o modulo about e precisamos informar qual é o componente padrão que será carregado e vamos definir isso nas rotas do about module
 ]
