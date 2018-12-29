@@ -18,7 +18,7 @@ export const ROUTES: Routes = [
         ]
     }, //indicamos parametro
     { path: 'order-summary', component: OrderSummaryComponent },
-    { path: 'order', component: OrderComponent },
+    { path: 'order', loadChildren: './order/order.module#OrderModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' } //carrega o componente de forma tardia (lazy loading)
     //agora carregamos o modulo about e precisamos informar qual é o componente padrão que será carregado e vamos definir isso nas rotas do about module
 ]
