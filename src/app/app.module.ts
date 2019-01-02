@@ -1,7 +1,4 @@
 import { SharedModule } from './shared/shared.module';
-import { OrderService } from './order/order.service';
-import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
-import { RestaurantsService } from './restaurants/restaurants.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -21,6 +18,7 @@ import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shoppin
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +38,10 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     BrowserModule,
     HttpModule,
     SharedModule, //FormsModule e ReactiveFormsModule estão no sharedModule que criamos
+    CoreModule,
     RouterModule.forRoot(ROUTES) //importando rotas para o modulo principal
   ],                                                    //LOCALE_ID permite trabalhar com o padrão pt-br para moeda
-  providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
   bootstrap: [AppComponent]
 })
 export class AppModule { }
