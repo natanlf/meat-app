@@ -2,7 +2,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 
 import { ROUTES } from './app.routes'
 
@@ -37,7 +37,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     BrowserModule,
     HttpModule,
     SharedModule.forRoot(), //FormsModule e ReactiveFormsModule estão no sharedModule que criamos e os providers tb por isso usamos forRoot()
-    RouterModule.forRoot(ROUTES) //importando rotas para o modulo principal
+    RouterModule.forRoot(ROUTES,{preloadingStrategy: PreloadAllModules}) //{preloadingStrategy: PreloadAllModules} carregamento dos modulos que não são os principais em background
   ],                                                    //LOCALE_ID permite trabalhar com o padrão pt-br para moeda
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
   bootstrap: [AppComponent]
