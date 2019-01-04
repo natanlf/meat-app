@@ -4,6 +4,8 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import { ROUTES } from './app.routes'
 
 import { AppComponent } from './app.component';
@@ -35,6 +37,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
   ],
   imports: [ //com o modulo about criado se colocassemos aqui ele ainda seria carregado ao abrir a apliacacao mas não queremos isso
     BrowserModule,
+    BrowserAnimationsModule, //modulo de animações
     HttpModule,
     SharedModule.forRoot(), //FormsModule e ReactiveFormsModule estão no sharedModule que criamos e os providers tb por isso usamos forRoot()
     RouterModule.forRoot(ROUTES,{preloadingStrategy: PreloadAllModules}) //{preloadingStrategy: PreloadAllModules} carregamento dos modulos que não são os principais em background
