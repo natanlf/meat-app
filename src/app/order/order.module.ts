@@ -9,7 +9,7 @@ const ROUTES: Routes = [
     {path:'', component: OrderComponent} //componente principal
 ]
 
-@NgModule({
+@NgModule({  //Aqui usamos o SharedModule mas sem os providers e no modulo raiz usamos com providers
     declarations:[OrderComponent, OrderItemsComponent, DeliveryCostsComponent],
     imports:[SharedModule, RouterModule.forChild(ROUTES)]//os componentes acima importam algumas coisas, vamos usar alguns recursos do sharedmodule
 })

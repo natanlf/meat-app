@@ -2,8 +2,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from './rating/rating.component';
 import { RadioComponent } from './radio/radio.component';
 import { InputComponent } from './input/input.component';
-import { NgModule } from "@angular/core";
+import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from '@angular/common';
+
+import { OrderService } from './../order/order.service';
+import { RestaurantsService } from './../restaurants/restaurants.service';
+import { ShoppingCartService } from './../restaurant-detail/shopping-cart/shopping-cart.service';
 
 /* Esse modulo vai ser compartilhado, importado por outros modulos como por exemplo root module e o nosso modulo de compra
 então vamos precisar do export para definir quais são os compoenentes dentro do nosso modulo que queremos que sejam utilizados
@@ -15,4 +19,11 @@ por outros modulos */
     exports:[InputComponent, RadioComponent, RatingComponent,
         CommonModule, FormsModule, ReactiveFormsModule] //usamos em outros modulos esses componentes e modulos
 })
-export class SharedModule {}
+export class SharedModule { //posso exportar o modulo com providers, agora não vamos mais precisar do core module, pois todos os providers necessários estão aqui
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedModule,
+            providers: [ShoppingCartService, RestaurantsService, OrderService]
+        }
+    }
+}
