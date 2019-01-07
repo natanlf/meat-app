@@ -1,3 +1,4 @@
-<div class="snackbar">
+<!--associando o elemento com a trigger para animar, precisamos também associar o estado da Trigger com o componente-->
+<div class="snackbar" [@snack-visibility]="snackVisibility">
   {{message}}
 </div>
