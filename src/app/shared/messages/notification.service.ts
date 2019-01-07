@@ -4,9 +4,9 @@ import { EventEmitter } from '@angular/core';
 //o snackbar vai se inscrever nesse serviço para exibir a notificação quando houver a chamada
 //Qualquer parte da aplicacao pode usar esse serviço
 export class NotificationService {
-    notifier = new EventEmitter<string>()
+    notifier = new EventEmitter<any>()
 
-    notify(message: string){
+    notify(message: any){
         this.notifier.emit(message) //assim passamos a mensagem que será exibida no snackbar
     }
 }
