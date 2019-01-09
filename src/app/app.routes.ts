@@ -1,5 +1,5 @@
+import { NotFoundComponent } from './not-found/not-found.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
-import { OrderComponent } from './order/order.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
@@ -19,6 +19,6 @@ export const ROUTES: Routes = [
     }, //indicamos parametro
     { path: 'order-summary', component: OrderSummaryComponent },
     { path: 'order', loadChildren: './order/order.module#OrderModule' },
-    { path: 'about', loadChildren: './about/about.module#AboutModule' } //carrega o componente de forma tardia (lazy loading)
-    //agora carregamos o modulo about e precisamos informar qual é o componente padrão que será carregado e vamos definir isso nas rotas do about module
+    { path: 'about', loadChildren: './about/about.module#AboutModule' },
+    { path: '**', component: NotFoundComponent } //rota de WildCard, caso acesse um caminho que não exista e precisa ficar no fim das rotas
 ]
