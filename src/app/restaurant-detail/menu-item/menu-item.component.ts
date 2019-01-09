@@ -20,7 +20,7 @@ export class MenuItemComponent implements OnInit {
 
   menuItemState = 'ready'
 
-  @Input() menuItem: MenuItem[] = [] //parent passa os itens de menu
+  @Input() menuItem: MenuItem //tinha um erro nessa linha
   @Output() add = new EventEmitter() //evento de saida para passar um valor a outro componente que é o parent
 
   constructor() { }
