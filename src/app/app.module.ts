@@ -1,3 +1,4 @@
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -43,8 +44,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpModule,
     SharedModule.forRoot(), //FormsModule e ReactiveFormsModule estão no sharedModule que criamos e os providers tb por isso usamos forRoot()
     RouterModule.forRoot(ROUTES,{preloadingStrategy: PreloadAllModules}) //{preloadingStrategy: PreloadAllModules} carregamento dos modulos que não são os principais em background
-  ],                                                    //LOCALE_ID permite trabalhar com o padrão pt-br para moeda
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
+  ],             //HashLocationStrategy podemos colocar o # para não termos problemas de url no server, no arquivo docs do drive tenho mais detealhes                                       
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
   bootstrap: [AppComponent]
 })
 export class AppModule { }
