@@ -45,7 +45,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SharedModule.forRoot(), //FormsModule e ReactiveFormsModule estão no sharedModule que criamos e os providers tb por isso usamos forRoot()
     RouterModule.forRoot(ROUTES,{preloadingStrategy: PreloadAllModules}) //{preloadingStrategy: PreloadAllModules} carregamento dos modulos que não são os principais em background
   ],             //HashLocationStrategy podemos colocar o # para não termos problemas de url no server, no arquivo docs do drive tenho mais detealhes                                       
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}], //colocando service no provider
   bootstrap: [AppComponent]
 })
 export class AppModule { }
