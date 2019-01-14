@@ -1,7 +1,10 @@
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { RestaurantsService } from './restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { Restaurant } from './restaurant/restaurant.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'mt-restaurants',
@@ -29,9 +32,25 @@ export class RestaurantsComponent implements OnInit {
 
   restaurants: Restaurant[]
 
-  constructor(private restaurantsService: RestaurantsService) { }
+  searchForm: FormGroup
+  searchControl: FormControl
+
+  constructor(
+    private restaurantsService: RestaurantsService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+
+    this.searchControl = this.fb.control('')
+    this.searchForm = this.fb.group({
+      searchControl: this.searchControl
+    })
+
+    //valueChanges é um evento que é acionado a cada mudança do input de busca de restaurantes
+    this.searchControl.valueChanges.switchMap(searchTerm => 
+      this.restaurantsService.restaurants(searchTerm))
+      .subscribe(restaurants => this.restaurants = restaurants)
+
     this.restaurantsService.restaurants()
     .subscribe(restaurants => this.restaurants = restaurants) //com subscribe pegamos apenas a lista de restaurantes
   }

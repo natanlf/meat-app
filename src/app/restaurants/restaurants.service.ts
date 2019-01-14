@@ -14,12 +14,12 @@ export class RestaurantsService {
     constructor(private http: Http){}
 
     //http retorna um objeto Observable da biblioteca rxjs
-    restaurants(): Observable<Restaurant[]> { //recebemos um observable com um array de restaurantes
+    restaurants(search?: string): Observable<Restaurant[]> { //recebemos um observable com um array de restaurantes
         
         //precisamos apenas do array de restaurantes, pois na resposta temos status da requisicao, corpo ... 
         //queremos apenas o array de restaurantes, por isso fazemos um map
         
-        return this.http.get(`${MEAT_API}/restaurants`)
+        return this.http.get(`${MEAT_API}/restaurants`, {params: {q: search}}) //json server permite parametros na busca, vai buscar em todos os dados sobre o restaurante
         .map(response => response.json())
         .catch(ErrorHandler.handlerError)
     }
