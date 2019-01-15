@@ -5,6 +5,8 @@ import { Restaurant } from './restaurant/restaurant.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'mt-restaurants',
@@ -47,7 +49,14 @@ export class RestaurantsComponent implements OnInit {
     })
 
     //valueChanges é um evento que é acionado a cada mudança do input de busca de restaurantes
-    this.searchControl.valueChanges.switchMap(searchTerm => 
+    /* debounceTime manda uma mensagem para mim se a diferença entre dois eventos for maior que o tempo que eu informar.
+    Assim vamos ter mais tempo para digitar antes de fazer uma busca no backend, assim não perdemos desempenho.
+    distinctUntilChanged faz um filtro e não vai permitir buscar palavras repetidas, exemplo: se eu digitar doces apagar rapidamente o s e preencher novamente
+    não vai buscar no backend, pois é a mesma busca de antes, Assim uma pesquisa precisa ser diferente da outra */
+    this.searchControl.valueChanges
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .switchMap(searchTerm => 
       this.restaurantsService.restaurants(searchTerm))
       .subscribe(restaurants => this.restaurants = restaurants)
 
