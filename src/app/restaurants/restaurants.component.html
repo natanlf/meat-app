@@ -28,6 +28,11 @@
             <!-- Enviando cada restaurante para o componente restaurant -->
             <mt-restaurant [restaurant]="restaurant"></mt-restaurant>
           </div>
+          <div *ngIf="restaurants?.length === 0" class="col-xs-12">
+            <p class="lead text-center">
+                Não foram encontrados itens para a sua busca.
+            </p>
+          </div>
         </div>
 
 </section>

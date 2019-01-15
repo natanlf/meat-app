@@ -7,6 +7,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/from';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'mt-restaurants',
@@ -52,12 +55,14 @@ export class RestaurantsComponent implements OnInit {
     /* debounceTime manda uma mensagem para mim se a diferença entre dois eventos for maior que o tempo que eu informar.
     Assim vamos ter mais tempo para digitar antes de fazer uma busca no backend, assim não perdemos desempenho.
     distinctUntilChanged faz um filtro e não vai permitir buscar palavras repetidas, exemplo: se eu digitar doces apagar rapidamente o s e preencher novamente
-    não vai buscar no backend, pois é a mesma busca de antes, Assim uma pesquisa precisa ser diferente da outra */
+    não vai buscar no backend, pois é a mesma busca de antes, Assim uma pesquisa precisa ser diferente da outra.
+    Vamos tratar erros na busca de restaurantes, pois não podemos quebrar essa busca */
     this.searchControl.valueChanges
       .debounceTime(500)
       .distinctUntilChanged()
       .switchMap(searchTerm => 
-      this.restaurantsService.restaurants(searchTerm))
+      this.restaurantsService.restaurants(searchTerm)
+      .catch(error => Observable.from([]))) //se der erro vamos retornar um array vazio e vamos tentar buscar toda vez que houver uma nova tentativa
       .subscribe(restaurants => this.restaurants = restaurants)
 
     this.restaurantsService.restaurants()
