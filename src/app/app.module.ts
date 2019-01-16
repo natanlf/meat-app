@@ -2,7 +2,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -41,7 +41,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
   imports: [ //com o modulo about criado se colocassemos aqui ele ainda seria carregado ao abrir a apliacacao mas não queremos isso
     BrowserModule,
     BrowserAnimationsModule, //modulo de animações
-    HttpModule,
+    HttpClientModule,
     SharedModule.forRoot(), //FormsModule e ReactiveFormsModule estão no sharedModule que criamos e os providers tb por isso usamos forRoot()
     RouterModule.forRoot(ROUTES,{preloadingStrategy: PreloadAllModules}) //{preloadingStrategy: PreloadAllModules} carregamento dos modulos que não são os principais em background
   ],             //HashLocationStrategy podemos colocar o # para não termos problemas de url no server, no arquivo docs do drive tenho mais detealhes                                       
