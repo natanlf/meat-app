@@ -10,6 +10,7 @@ export class InputComponent implements OnInit, AfterContentInit {
 
   @Input() label: string //Usamos input pois ambos vão poder ser informados de fora do componente input
   @Input() errorMessage: string
+  @Input() showTip: boolean = true
 
   input: any //objeto que fazemos referencia no component
 
