@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:3000' //o ambiente de desenvolvimento tem essa url
+  api: 'https://localhost:3001' //o ambiente de desenvolvimento tem essa url
 };
