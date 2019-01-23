@@ -1,3 +1,4 @@
+import { LoginService } from './../security/login/login.service';
 import { NotificationService } from './messages/notification.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from './rating/rating.component';
@@ -25,7 +26,7 @@ export class SharedModule { //posso exportar o modulo com providers, agora não 
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService] //coloco o NotificationService para ser usado na aplicacao
+            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService, LoginService] //coloco o NotificationService para ser usado na aplicacao
         }
     }
 }
