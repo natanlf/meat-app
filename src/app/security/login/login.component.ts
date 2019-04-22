@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     })
 
     //pegando referencias dos parametros através do snapshot, se ninguém passar uma rota, vamos para a raíz (/)
-    this.navigateTo = this.activetedRoute.snapshot.params['to'] || '/'
+    this.navigateTo = this.activetedRoute.snapshot.params['to'] || btoa('/') //btoa = encode
   }
 
   login(){
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     .subscribe(user => this.notificationService.notify(`Bem vindo, ${user.name}`),
     response => this.notificationService.notify(response.error.message),
       ()=>{ //caso o login der certo vai navegar para a rota informada
-        this.router.navigate([this.navigateTo])
+        this.router.navigate([atob(this.navigateTo)]) //atob = decode
       }
     )
   }

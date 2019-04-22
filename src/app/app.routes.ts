@@ -23,7 +23,7 @@ export const ROUTES: Routes = [
     { path: 'restaurants', component: RestaurantsComponent },
     { path: 'order-summary', component: OrderSummaryComponent },
     { path: 'order', loadChildren: './order/order.module#OrderModule',
-    canLoad: [LoggedInGuard] }, //esse canLoad vai verificar se podemos carregar o módulo
+    canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] }, //esse canLoad vai verificar se podemos carregar o módulo
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
     { path: '**', component: NotFoundComponent } //rota de WildCard, caso acesse um caminho que não exista e precisa ficar no fim das rotas
 ]

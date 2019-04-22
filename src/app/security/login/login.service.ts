@@ -23,7 +23,7 @@ user: User
         .do(user => this.user = user)
     }
 
-    handleLogin(path?: string){
-        this.router.navigate(['/login', path]) //caso não esteja autenticado, mandamos o usuário para a página de login
+    handleLogin(path?: string){ //btoa = encoda em base 64 para ajustar a url
+        this.router.navigate(['/login', btoa(path)]) //caso não esteja autenticado, mandamos o usuário para a página de login
     }
 }
