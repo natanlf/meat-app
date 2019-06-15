@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order, OrderItem } from './order.model'
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import 'rxjs/add/operator/do'
 
 @Component({
   selector: 'mt-order',
@@ -20,6 +21,8 @@ export class OrderComponent implements OnInit {
   orderForm: FormGroup
 
   delivery: number = 8
+
+  orderId: string
 
   paymentOptions: RadioOption[] = [
     {label: 'Dinheiro', value: 'MON'},
@@ -78,10 +81,17 @@ export class OrderComponent implements OnInit {
     return this.orderService.remove(item)
   }
 
+  isOrderCompleted(): boolean { //se tem order id a compra foi concluída
+    return this.orderId !== undefined
+  }
+
   checkOrder(order: Order){ //insere o pedido, o map transforma o cartItem para orderItem
     order.orderItems = this.cartItems()
     .map( (item:CartItem) => new OrderItem(item.quantity, item.menuItem.id))
     this.orderService.checkOrder(order)
+    .do((orderId: string)=> { //pegamos o order id quando concluir a compra
+      this.orderId = orderId
+    })
     .subscribe((orderId: string) => {
       this.router.navigate(['/order-summary']) //ao finalizar vai navegar para order-summary
       console.log(`Compra concluída: ${orderId}`)
