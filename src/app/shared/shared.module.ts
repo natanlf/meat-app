@@ -1,5 +1,8 @@
 import { NotificationService } from './messages/notification.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+
 import { RatingComponent } from './rating/rating.component';
 import { RadioComponent } from './radio/radio.component';
 import { InputComponent } from './input/input.component';
@@ -14,6 +17,7 @@ import { LoggedInGuard } from '../security/loggedin.guard';
 import { LoginService } from './../security/login/login.service';
 
 import { LeaveOrderGuard } from './../order/leave-order.guard';
+import { AuthInterceptor } from 'app/security/auth.interceptor';
 
 /* Esse modulo vai ser compartilhado, importado por outros modulos como por exemplo root module e o nosso modulo de compra
 então vamos precisar do export para definir quais são os compoenentes dentro do nosso modulo que queremos que sejam utilizados
@@ -29,7 +33,15 @@ export class SharedModule { //posso exportar o modulo com providers, agora não 
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService, LoginService, LoggedInGuard, LeaveOrderGuard] //coloco o NotificationService para ser usado na aplicacao
+            providers: [ShoppingCartService, 
+                RestaurantsService,
+                OrderService, 
+                NotificationService, 
+                LoginService, 
+                LoggedInGuard, 
+                LeaveOrderGuard,
+                {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+            ] //coloco o NotificationService para ser usado na aplicacao
         }
     }
 }
